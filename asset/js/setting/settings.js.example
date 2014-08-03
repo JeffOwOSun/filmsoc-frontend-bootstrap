@@ -1,0 +1,15 @@
+/**
+ * @fileoverview Global Settings.
+ * Replace the placeholders fo
+ */
+
+cr.define('cr.settings', function() {
+  return {
+    resource_base: '{string} URL to the frontend assets base',
+    api_base: '{string} URL to the backend api base',
+    login_url: '{string} URL to the backend login url',
+    logout_url: '{string} URL to the backend logout url',
+    url_base: '{{string} relative url base',
+    scribd_id: '{string} scribd user id',
+  }
+});

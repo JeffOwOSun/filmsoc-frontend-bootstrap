@@ -1,0 +1,51 @@
+<div id="publication-form" class="page-form">
+	<div>
+		<div class="cover-drop">
+			<div class="cover-container">
+				<img src="../asset/css/square.png" alt="">
+				<div class="drag-notifier" hidden>Drop...</div>
+			</div>
+			<div>Drag Cover Picture Over Here</div>
+			<div class="progressbar-track" hidden>
+				<div class="progressbar-bar"></div>
+			</div>
+			<span class="progressbar-progress" hidden></span>
+		</div>
+		<input type="hidden" name="cover_url" value="{{publication.cover_url?publication.cover_url.id:''|attr}}">
+		<div class="publication-side-edit multiline">
+			<label>
+				<span>Title:</span>
+				<input type="text" name="title" placeholder="Title of the publication" value="{{publication.title|attr}}">
+			</label>
+			<label>
+				<span>Type: </span>
+				<select name="pub_type">
+					<option value="Magazine" {{publication.pub_type?(publication.pub_type==='Magazine'?'selected':''):'selected'|safe}}>Magazine</option>
+					<option value="MicroMagazine" {{publication.pub_type==='MicroMagazine'?'selected':''|safe}}>Micro Magazine</option>
+					<option value="Podcast" {{publication.pub_type==='Podcast'?'selected':''|safe}}>Podcast</option>
+				</select>
+			</label>
+		</div>
+	</div>
+	<div class="nocell publication-file" {{publication.pub_type?(publication.pub_type==='MicroMagazine'?'hidden':''):''|safe}}>
+		<div class="file-drop">
+			<div class="file-container">
+				<img src="../asset/css/square.png" alt="">
+				<div class="drag-notifier" hidden>Drop...</div>
+			</div>
+			<div>Drag File Over Here</div>
+			<div class="progressbar-track" hidden>
+				<div class="progressbar-bar"></div>
+			</div>
+			<span class="progressbar-progress" hidden></span>
+		</div>
+		<input type="hidden" name="doc_url" value="{{publication.doc_url?publication.doc_url.id:''|attr}}" {{publication.pub_type?(publication.pub_type==='MicroMagazine'?'disabled':''):''|safe}}>
+		<a class="dn_link" href="{{base_url}}{{publication.doc_url?publication.doc_url.url:''|attr}}?force_download=true&dn_name={{publication.doc_url?publication.doc_url.name:''|attr}}" {{publication.doc_url?'':'hidden'|safe}}>Download</a>
+	</div>
+	<div class="nocell publication-link" {{publication.pub_type?(publication.pub_type==='MicroMagazine'?'':'hidden'):'hidden'|safe}}>
+		<label>
+			<span>Direct URL:</span>
+			<input type="text" name="ext_doc_url" placeholder="The direct link to the content" value="{{publication.ext_doc_url|attr}}" {{publication.pub_type?(publication.pub_type==='MicroMagazine'?'':'disabled'):'disabled'|safe}}>
+		</label>
+	</div>
+</div>
