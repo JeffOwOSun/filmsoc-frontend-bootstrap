@@ -45,7 +45,12 @@
     <link rel="stylesheet" type="text/css" href="asset/css/ellipsis.css">
     <link rel="stylesheet" type="text/css" href="asset/css/notification.css">
     <link rel="stylesheet" type="text/css" href="asset/css/scrollbar.css">
-
+    
+    <!-- mmenu -->
+    <script type="text/javascript" src="asset/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="asset/js/jquery.mmenu.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.css"/>
+    
     <!-- Google Analytics -->
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -79,6 +84,20 @@
         top.location = self.location;
     }
     </script>
+    
+    <nav id="push-menu">
+        <ul>
+            <li><a class="navigator selected" controls="news" href="#!home">Home</a></li>
+            <li><a class="navigator" controls="show" href="#!show/">Regular Film Show</a></li>
+            <li><a class="navigator" controls="library" href="#!library/">VCD/DVD Library</a></li>
+            <li><a class="navigator" controls="ticket" href="#!ticket/">Preview Show Tickets</a></li>
+            <li><a class="navigator" controls="document" href="#!document/">Documents</a></li>
+            <li><a class="navigator" controls="publication" href="#!publication/">Publications</a></li>
+            <li><a class="navigator" controls="sponsor" href="#!sponsor/" rel="nofollow">Sponsors</a></li>
+            <li><a class="navigator-last" controls="about" href="#!about/">About Us</a></li>
+        </ul>
+    </nav>
+    
     <div id="notification-wrapper">
         <div id="notification">
             <span>&nbsp;</span>
@@ -123,17 +142,22 @@
         <div id="footer-helper"></div>
     </div>
     <div id="footer">
-        <a class="navigator selected" controls="news" href="#!home">Home</a>
-        <a class="navigator" controls="show" href="#!show/">Regular Film Show</a>
-        <a class="navigator" controls="library" href="#!library/">VCD/DVD Library</a>
-        <a class="navigator" controls="ticket" href="#!ticket/">Preview Show Tickets</a>
-        <a class="navigator" controls="document" href="#!document/">Documents</a>
-        <a class="navigator" controls="publication" href="#!publication/">Publications</a>
-        <a class="navigator" controls="sponsor" href="#!sponsor/" rel="nofollow">Sponsors</a>
-        <a class="navigator-last" controls="about" href="#!about/">About Us</a>
+
     </div>
 
     <!-- scripts -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#my-menu").mmenu({
+            // options
+        }, {
+            // configuration
+            offCanvas: {
+                pageNodetype: "section"
+            }
+        });
+    });
+    </script>
     <script type="text/javascript" src="http://www.scribd.com/javascripts/scribd_api.js" defer></script>
     <script type="text/javascript" src="asset/js/front/ziggurat.js"></script>
     <script type="text/javascript" src="asset/js/application.min.js"></script>
