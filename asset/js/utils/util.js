@@ -41,15 +41,6 @@ function assert(condition, opt_message) {
 var global = this;
 
 /**
- * Alias for document.getElementById.
- * @param {string} id The ID of the element to find.
- * @return {HTMLElement} The found element or null if not found.
- */
-function $(id) {
-  return document.getElementById(id);
-}
-
-/**
  * Pad a number to fixed width.
  * @param {integer} n The number to pad.
  * @param {integer} width The width to pad to.

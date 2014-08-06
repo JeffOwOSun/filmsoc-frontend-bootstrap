@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=1.0 user-scalable=yes" />
     
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <base href="http://ihome.ust.hk/~su_film/">
+    <base href="http://ihome.ust.hk/~ysunai/">
 
     <!-- site info -->
     <meta name="description" content="Official Website of Film Society, HKUSTSU">
@@ -39,17 +39,32 @@
 
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Parisienne|Simonetta' rel='stylesheet' type='text/css'>
-
-    <!-- stylesheets -->
-    <link rel="stylesheet" type="text/css" href="asset/css/screen.css">
-    <link rel="stylesheet" type="text/css" href="asset/css/ellipsis.css">
-    <link rel="stylesheet" type="text/css" href="asset/css/notification.css">
-    <link rel="stylesheet" type="text/css" href="asset/css/scrollbar.css">
     
-    <!-- mmenu -->
+    <!-- jquery -->
     <script type="text/javascript" src="asset/js/jquery-1.11.1.min.js"></script>
+    
+    <!-- mmenu -->    
     <script type="text/javascript" src="asset/js/jquery.mmenu.min.js"></script>
     <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.themes.css"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.widescreen.css" media="all and (min-width:900px)"/>
+    <link rel="stylesheet" type="text/css" href="asset/css/mmenuLayout.css"/>
+    <script type="text/javascript">
+    $(document).on("ready",function() {
+        $("#push-menu").mmenu({
+            // options
+            onClick:{
+                preventDefault: false
+            },
+            classes: "mm-light mm-slide"
+        }, {
+            // configuration
+        });
+    });
+    </script>
+    
+    <!-- Knockout -->
+    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
     
     <!-- Google Analytics -->
     <script>
@@ -86,80 +101,63 @@
     </script>
     
     <nav id="push-menu">
-        <ul>
-            <li><a class="navigator selected" controls="news" href="#!home">Home</a></li>
-            <li><a class="navigator" controls="show" href="#!show/">Regular Film Show</a></li>
-            <li><a class="navigator" controls="library" href="#!library/">VCD/DVD Library</a></li>
-            <li><a class="navigator" controls="ticket" href="#!ticket/">Preview Show Tickets</a></li>
-            <li><a class="navigator" controls="document" href="#!document/">Documents</a></li>
-            <li><a class="navigator" controls="publication" href="#!publication/">Publications</a></li>
-            <li><a class="navigator" controls="sponsor" href="#!sponsor/" rel="nofollow">Sponsors</a></li>
-            <li><a class="navigator-last" controls="about" href="#!about/">About Us</a></li>
+        <ul data-bind="foreach: menuItems">
+            <li data-bind="css:{Selected: $parent.shouldBeSelected($data)}"><a data-bind="attr:{href: hashTag}, text: name"></a></li>
         </ul>
     </nav>
-    
-    <div id="notification-wrapper">
-        <div id="notification">
-            <span>&nbsp;</span>
-            <span class="link"><span class="link-color"></span></span>
-        </div>
-    </div>
-    <div id="onesentence" tooltip=""><span>Loading...</span></div>
-    <div id="wrapper">
-        <div id="header">
-            <div id="logo"><img src="asset/css/logo.png" alt="Film Society Logo"></div>
-            <div id="user-wrapper">
-                <div class="user-action">
-                    <div><button class="link link-login">Login</button></div>
-                </div>
-                <div class="user-info">
-                    <div class="username">Guest</div>
-                    <div class="usertype">Non-Member</div>
-                </div>
-            </div>
-        </div>
-        <div id="content-wrapper">
-            <div class="spinner">
-                <div class="item-0"><div></div><div></div></div>
-                <div class="item-1"><div></div><div></div></div>
-                <div class="item-2"><div></div><div></div></div>
-                <div class="item-3"><div></div><div></div></div>
-                <div class="item-4"><div></div><div></div></div>
-                <div class="item-5"><div></div><div></div></div>
-                <div class="item-6"><div></div><div></div></div>
-                <div class="item-7"><div></div><div></div></div>
-            </div>
-        </div>
+    <div id="page" class="mm-page">
         <noscript id="noscript-wrapper">
             <p>Film Society, HKUSTSU is a society aiming to promote film culture around the campus of HKUST (The Hong Kong University of Science and Technology).</p>
             <p>We hold several regular functions including Regular Film Show, VCD/DVD Library, Preview Show Tickets which are free to our members. On top of these, we also have featured functions from time to time.</p>
             <p>The website is designed under the powerful HTML5/CSS3 features. Please turn on your javascript for better performance</p>
         </noscript>
-        <div id="orientation-wrapper">
+        <div id="orientation-wrapper" hidden="true">
             <img src="asset/css/rotate.png" alt="Please rotate device">
             <p>Please rotate your device to landscape mode.</p>
         </div>
-        <div id="footer-helper"></div>
     </div>
-    <div id="footer">
-
-    </div>
-
+    <a id="hamburger" class="mm-fixed-top" href="#push-menu">
+        <span></span>
+    </a>
     <!-- scripts -->
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#my-menu").mmenu({
-            // options
-        }, {
-            // configuration
-            offCanvas: {
-                pageNodetype: "section"
-            }
-        });
-    });
-    </script>
+    
     <script type="text/javascript" src="http://www.scribd.com/javascripts/scribd_api.js" defer></script>
-    <script type="text/javascript" src="asset/js/front/ziggurat.js"></script>
-    <script type="text/javascript" src="asset/js/application.min.js"></script>
+    <script type="text/javascript" src="asset/js/ziggurat.js"></script>
+    <script type="text/javascript" src="asset/js/jquery.ba-hashchange.min.js"></script>
+    <script>
+        $(window).hashchange(function()
+        {
+            alert("hashchanged!"+window.location.hash);
+        });
+    </script>
+    <script>
+        function PushMenuViewModel(){
+            var self=this;
+            //the changeable array for menu items. adding to this will 
+            self.menuItems=ko.observableArray();
+            self._appendItem=function(item){
+                self.menuItems.push(item);
+            }
+            self.addItem=function(name,hashTag){
+                self._appendItem({
+                    hashTag: hashTag,
+                    name:name,
+                });
+            }
+            self.shouldBeSelected=function(item){
+                return (item.hashTag==window.location.hash)?true:false
+            }
+        }
+        pushMenuViewModel = new PushMenuViewModel()
+        ko.applyBindings(pushMenuViewModel, $('#push-menu')[0]);
+        
+        //these will later be distributed into views
+        pushMenuViewModel.addItem("Home","#!home");
+        pushMenuViewModel.addItem("DVD Library","#!liba");
+        pushMenuViewModel.addItem("Free Film Tickets","#!ticket");
+        pushMenuViewModel.addItem("Regular Film Show","#!show");
+        pushMenuViewModel.addItem("Documents","#!document");
+        pushMenuViewModel.addItem("Publications","#!publication");
+    </script>
 </body>
 </html>

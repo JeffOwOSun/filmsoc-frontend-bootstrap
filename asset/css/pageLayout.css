@@ -1,0 +1,11 @@
+/* page layout */
+body
+{
+	background: #5BC5FF;
+	color: #fff;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	-webkit-text-size-adjust: none;
+    margin: 0;
+}

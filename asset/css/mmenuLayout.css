@@ -1,0 +1,90 @@
+/* page layout */
+body
+{
+	background: #5BC5FF;
+	color: #fff;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+	line-height: 22px;
+	-webkit-text-size-adjust: none;
+    margin: 0;
+}
+
+#page
+{
+	/*box-shadow: none;*/
+	width: 100%;
+	min-width: 1000px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}
+
+
+/* hamburger button layout*/
+#hamburger
+{
+	display: block;
+	width: 40px;
+	height: 36px;
+	margin: 20px;
+	position: fixed;
+	z-index: 2;
+}
+#hamburger:before,
+#hamburger:after,
+#hamburger span
+{
+	background: #fff;
+	content: '';
+	display: block;
+	width: 30px;
+	height: 6px;
+	position: absolute;
+	left: 5px;
+}
+#hamburger:before
+{
+	top: 5px;
+}
+#hamburger:after
+{
+	bottom: 5px;
+}
+#hamburger span
+{
+	top: 50%;
+	margin-top: -3px;
+}
+
+/*hide the hamburger button group if the client is wider than 900px*/
+@media all and (min-width: 900px)
+{
+	#hamburger {
+		display: none;
+	}
+}
+
+/* Hamburger animation */
+#hamburger:before,
+#hamburger:after,
+#hamburger span
+{
+	transition: none 0.5s ease 0.5s;
+	transition-property: transform, top, bottom, left, opacity;
+}
+html.mm-opening #hamburger span
+{
+	left: -50px;
+	opacity: 0;
+}
+html.mm-opening #hamburger:before
+{
+	transform: rotate( 45deg );
+	top: 15px;
+}
+html.mm-opening #hamburger:after
+{
+	transform: rotate( -45deg );
+	bottom: 15px;
+}

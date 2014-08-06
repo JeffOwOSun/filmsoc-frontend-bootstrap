@@ -1,28 +1,15 @@
 {
 	"prefix": "asset/js/",
 	"jobs": {
-		"asset/js/backend.min.js": [
-			"util.js", "event_tracker.js", "cr.js", "event_target.js",
-			"settings.js", "template.js", "model.js", "pager.js", "router.js",
-			"ui.js", "display_list.js", "notification.js", "custom_bbcode.js", "admin/bubble.js",
-			"admin/overlay.js", "admin/admin_ui_control.js", "admin/alert_overlay.js",
-			"admin/drag_wrapper.js", "admin/richtext_editor.js", "admin/uploader.js",
-			"admin/admin_models.js", "admin/application.js", "admin/log_overlay.js",
-			"admin/user_view.js", "admin/disk_view.js", "admin/diskreview_view.js",
-			"admin/onesentence_view.js", "admin/settings_view.js", "admin/rfs_view.js",
-			"admin/ticket_view.js", "admin/document_view.js", "admin/sponsor_view.js",
-			"admin/news_view.js", "admin/colorpicker.min.js", "admin/exco_view.js",
-			"rotate.js", "admin/publication_view.js"
-		],
 		"asset/js/application.min.js": [
-			"util.js", "event_tracker.js", "cr.js", "event_target.js",
-			"settings.js", "template.js", "model.js", "pager.js", "router.js",
-			"ui.js", "display_list.js", "notification.js", "custom_bbcode.js", "front/front_models.js",
-			"front/ui_util.js", "front/custom_select.js", "front/rand_sentence.js",
-			"front/application.js", "front/liba_view.js", "front/rfs_view.js",
-			"front/ticket_view.js", "front/document_view.js", "front/sponsor_view.js",
-			"front/scroller.js", "front/home_view.js", "rotate.js", "front/aboutus_view.js",
-			"front/publication_view.js"
+			"utils/util.js", "utils/event_tracker.js", "framework/cr.js", "framework/event_target.js",
+			"setting/settings.js", "ui/template.js", "framework/model.js", "framework/pager.js", "utils/router.js",
+			"ui/ui.js", "ui/display_list.js", "ui/notification.js", "ui/custom_bbcode.js", "models/front_models.js",
+			"ui/ui_util.js", "ui/custom_select.js", "utils/rand_sentence.js",
+			"application/application.js", "view/liba_view.js", "view/rfs_view.js",
+			"view/ticket_view.js", "view/document_view.js", "view/sponsor_view.js",
+			"ui/scroller.js", "view/home_view.js", "ui/rotate.js", "view/aboutus_view.js",
+			"view/publication_view.js"
 		]
 	},
 	"header": "asset/js/INFO",
