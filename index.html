@@ -103,40 +103,13 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Link</a></li>
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
+                <ul id="navBar" class="nav navbar-nav" data-bind="foreach: menuItems">
+                    <li data-bind="css:{active: isActive}"><a data-bind="text: name, click: $root.itemClick" href="#"></a></li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
+                <!-- login information -->
+                <ul id="userPanel" class="nav navbar-nav navbar-right">
+                    <li><p class="navbar-text" data-bind="text: memberType"></p></li>
+                    <li><button type="button" class="btn btn-default navbar-btn" data-bind="text: buttonText">Log in</button></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -148,11 +121,11 @@
         <p>The website is designed under the powerful HTML5/CSS3 features. Please turn on your javascript for better performance</p>
     </noscript>
     
-    <div id="homeView">
+    <div id="homeView" class="container-fluid" data-bind="css:{hide:isHidden}">
         
     </div>
     
-    <div id="libaView" class="container-fluid">
+    <div id="libaView" class="container-fluid" data-bind="css:{hide:isHidden}">
         <h1> DVD/VCD Library </h1>
         <div class="row">
             <div class="col-sm-6 col-md-4">
@@ -216,65 +189,7 @@
     <script type="text/javascript" src="http://www.scribd.com/javascripts/scribd_api.js" defer></script>
     <script type="text/javascript" src="asset/js/ziggurat.js"></script>
     <script type="text/javascript" src="asset/js/jquery.ba-hashchange.min.js"></script>
-    <script>
-        $(window).hashchange(function()
-        {
-            alert("hashchanged!"+window.location.hash);
-            //First of all, our push menu should use the hash to determine the correct view to loaded
-            //Next, the corresponding view, which has been loaded on or before last step, should process the parameters after the hash.
-            //That is to say, ALL RESPONSE TO USER INPUT SHOULD TAKE LOCATION HASH AS MEDIUM TO INITIATE VIEW CHANGE AND SUBSEQUENT DATA RETRIEVING. This is to unite application behavior when the user click "refresh" or enter a custom url with that when user interact with application elements.
-        });
-    </script>
-    <!-- PushMenuViewModel() -->
-    <script>
-        function PushMenuViewModel(){
-            //saving this CONTEXT into a variable, so that ENCAPSULATION will work for any callback defined here.
-            var self=this;
-            
-            //the changeable array for menu items. adding to this will 
-            self.menuItems=ko.observableArray();
-            
-            //Private function, nothing special :-b
-            self._appendItem=function(item){
-                self.menuItems.push(item);
-            }
-            
-            //Public function. ViewModels call this function to add themselves onto the menu.
-            self.addItem=function(name,hashTag,initializationCallback){
-                self._appendItem({
-                    hashTag: hashTag,
-                    name:name,
-                    initializationCallback: initializationCallback
-                });
-            }
-            
-            //#depleted. Will be removed.
-            self.shouldBeSelected=function(item){
-                return (item.hashTag==window.location.hash)?true:false
-            }
-            
-            //Public function. Click handler. Changes the hash according to the hashTag field of the corresponding menu item.
-            self.itemClick=function(clickedItem){
-                
-            }
-            
-            //Public function. Load the designated view by calling the corresponding initializationCallback.
-            //This function is called by $(window).hashchange event handler, which means this function can rely on the location hash for the view to be loaded.
-            self.loadView=function(viewToBeLoaded){
-                
-            }
-            
-        }
-        pushMenuViewModel = new PushMenuViewModel()
-        ko.applyBindings(pushMenuViewModel, $('#push-menu')[0]);
-        
-        //these will later be distributed into views
-        pushMenuViewModel.addItem("Home","#!home");
-        pushMenuViewModel.addItem("DVD Library","#!liba");
-        pushMenuViewModel.addItem("Free Film Tickets","#!ticket");
-        pushMenuViewModel.addItem("Regular Film Show","#!show");
-        pushMenuViewModel.addItem("Documents","#!document");
-        pushMenuViewModel.addItem("Publications","#!publication");
-    </script>
+    <script type="text/javascript" src="asset/js/routeManager.js"></script>
+    <script type="text/javascript" src="asset/js/viewModels.js"></script>
 </body>
 </html>
