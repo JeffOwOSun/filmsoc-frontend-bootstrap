@@ -15,9 +15,9 @@ body {
   display: none !important; }
 
 .mm-page {
-  box-shadow: none !important;
+  /*box-shadow: none !important;*/
   background: inherit;
-  width: 70% !important;
+  width: 80% !important;
   min-height: 100%;
   height: auto !important;
   margin: 0 !important;

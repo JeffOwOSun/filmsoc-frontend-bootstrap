@@ -14,7 +14,7 @@ body
 {
 	/*box-shadow: none;*/
 	width: 100%;
-	min-width: 1000px;
+	/*min-width: 1000px;*/
 	overflow: hidden;
 	position: relative;
 	z-index: 1;
@@ -35,7 +35,7 @@ body
 #hamburger:after,
 #hamburger span
 {
-	background: #fff;
+	background: #aaa;
 	content: '';
 	display: block;
 	width: 30px;

@@ -37,34 +37,22 @@
     <link rel="bookmark" type="image/png" href="asset/css/FILM_FAVICON">
     <link rel="shortcut icon" type="image/png" href="asset/css/FILM_FAVICON">
 
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Parisienne|Simonetta' rel='stylesheet' type='text/css'>
-    
     <!-- jquery -->
     <script type="text/javascript" src="asset/js/jquery-1.11.1.min.js"></script>
+     
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="asset/css/bootstrap.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="asset/css/bootstrap-theme.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="asset/js/bootstrap.js"></script>
     
-    <!-- mmenu -->    
-    <script type="text/javascript" src="asset/js/jquery.mmenu.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.css"/>
-    <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.themes.css"/>
-    <link rel="stylesheet" type="text/css" href="asset/css/jquery.mmenu.widescreen.css" media="all and (min-width:900px)"/>
-    <link rel="stylesheet" type="text/css" href="asset/css/mmenuLayout.css"/>
-    <script type="text/javascript">
-    $(document).on("ready",function() {
-        $("#push-menu").mmenu({
-            // options
-            onClick:{
-                preventDefault: true
-            },
-            classes: "mm-light mm-slide"
-        }, {
-            // configuration
-        });
-    });
-    </script>
-    
-    <!-- Knockout -->
+    <!-- Knockout.js -->
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    
+    <!-- Sammy.js -->
+    <script type="text/javascript" src="asset/js/sammy-latest.min.js"></script>
     
     <!-- Google Analytics -->
     <script>
@@ -99,26 +87,130 @@
         top.location = self.location;
     }
     </script>
-    
-    <nav id="push-menu">
-        <ul data-bind="foreach: menuItems">
-            <li data-bind="css:{Selected: $parent.shouldBeSelected($data)}"><a data-bind="attr:{href: hashTag}, text: name"></a></li>
-        </ul>
+        
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Film Society</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
-    <div id="page" class="mm-page">
-        <noscript id="noscript-wrapper">
-            <p>Film Society, HKUSTSU is a society aiming to promote film culture around the campus of HKUST (The Hong Kong University of Science and Technology).</p>
-            <p>We hold several regular functions including Regular Film Show, VCD/DVD Library, Preview Show Tickets which are free to our members. On top of these, we also have featured functions from time to time.</p>
-            <p>The website is designed under the powerful HTML5/CSS3 features. Please turn on your javascript for better performance</p>
-        </noscript>
-        <div id="orientation-wrapper" hidden="true">
-            <img src="asset/css/rotate.png" alt="Please rotate device">
-            <p>Please rotate your device to landscape mode.</p>
+
+    <noscript id="noscript-wrapper">
+        <p>Film Society, HKUSTSU is a society aiming to promote film culture around the campus of HKUST (The Hong Kong University of Science and Technology).</p>
+        <p>We hold several regular functions including Regular Film Show, VCD/DVD Library, Preview Show Tickets which are free to our members. On top of these, we also have featured functions from time to time.</p>
+        <p>The website is designed under the powerful HTML5/CSS3 features. Please turn on your javascript for better performance</p>
+    </noscript>
+    
+    <div id="homeView">
+        
+    </div>
+    
+    <div id="libaView" class="container-fluid">
+        <h1> DVD/VCD Library </h1>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <a id="hamburger" class="mm-fixed-top" href="#push-menu">
-        <span></span>
-    </a>
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    
     <!-- scripts -->
     
     <script type="text/javascript" src="http://www.scribd.com/javascripts/scribd_api.js" defer></script>
@@ -128,25 +220,50 @@
         $(window).hashchange(function()
         {
             alert("hashchanged!"+window.location.hash);
+            //First of all, our push menu should use the hash to determine the correct view to loaded
+            //Next, the corresponding view, which has been loaded on or before last step, should process the parameters after the hash.
+            //That is to say, ALL RESPONSE TO USER INPUT SHOULD TAKE LOCATION HASH AS MEDIUM TO INITIATE VIEW CHANGE AND SUBSEQUENT DATA RETRIEVING. This is to unite application behavior when the user click "refresh" or enter a custom url with that when user interact with application elements.
         });
     </script>
+    <!-- PushMenuViewModel() -->
     <script>
         function PushMenuViewModel(){
+            //saving this CONTEXT into a variable, so that ENCAPSULATION will work for any callback defined here.
             var self=this;
+            
             //the changeable array for menu items. adding to this will 
             self.menuItems=ko.observableArray();
+            
+            //Private function, nothing special :-b
             self._appendItem=function(item){
                 self.menuItems.push(item);
             }
-            self.addItem=function(name,hashTag){
+            
+            //Public function. ViewModels call this function to add themselves onto the menu.
+            self.addItem=function(name,hashTag,initializationCallback){
                 self._appendItem({
                     hashTag: hashTag,
                     name:name,
+                    initializationCallback: initializationCallback
                 });
             }
+            
+            //#depleted. Will be removed.
             self.shouldBeSelected=function(item){
                 return (item.hashTag==window.location.hash)?true:false
             }
+            
+            //Public function. Click handler. Changes the hash according to the hashTag field of the corresponding menu item.
+            self.itemClick=function(clickedItem){
+                
+            }
+            
+            //Public function. Load the designated view by calling the corresponding initializationCallback.
+            //This function is called by $(window).hashchange event handler, which means this function can rely on the location hash for the view to be loaded.
+            self.loadView=function(viewToBeLoaded){
+                
+            }
+            
         }
         pushMenuViewModel = new PushMenuViewModel()
         ko.applyBindings(pushMenuViewModel, $('#push-menu')[0]);
