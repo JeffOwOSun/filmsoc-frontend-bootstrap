@@ -42,14 +42,17 @@
      
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="asset/css/bootstrap.css">
+    <link rel="stylesheet" href="asset/css/bootstrap.min.css">
     <!-- Optional theme -->
+    <!--
     <link rel="stylesheet" href="asset/css/bootstrap-theme.css">
+    -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="asset/js/bootstrap.js"></script>
     
     <!-- Knockout.js -->
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+    <script type="text/javascript" src="asset/js/knockout.mapping-latest.js"></script>
     
     <!-- Sammy.js -->
     <script type="text/javascript" src="asset/js/sammy-latest.min.js"></script>
@@ -108,8 +111,8 @@
                 </ul>
                 <!-- login information -->
                 <ul id="userPanel" class="nav navbar-nav navbar-right">
-                    <li><p class="navbar-text" data-bind="text: memberType"></p></li>
-                    <li><button type="button" class="btn btn-default navbar-btn" data-bind="text: buttonText">Log in</button></li>
+                    <li><p class="navbar-text" data-bind="text:user.full_name"></p></li>
+                    <li><button type="button" class="btn btn-default navbar-btn" data-bind="text: buttonText, click: buttonClick"></button></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -122,12 +125,103 @@
     </noscript>
     
     <div id="homeView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        <h1> Home </h1>
         
     </div>
     
     <div id="libaView" class="container-fluid" data-bind="css:{hide:isHidden}">
         <h1> DVD/VCD Library </h1>
-        <div class="row">
+        <div class="row" data-bind="foreach: >
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="asset/meme/holder.png" alt="...">
+                    <div class="caption">
+                    <h3>Thumbnail label</h3>
+                    <p>...</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
                     <img src="asset/meme/holder.png" alt="...">
@@ -160,6 +254,29 @@
             </div>
         </div>
     </div>
+    
+    <div id="showView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        
+    </div>
+    
+    <div id="ticketView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        
+    </div>
+    <div id="documentsView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        
+    </div>
+    <div id="publicationsView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        
+    </div>
+    
+    <div id="sponsorsView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        
+    </div>
+    
+    <div id="aboutUsView" class="container-fluid" data-bind="css:{hide:isHidden}">
+        
+    </div>
+    
     <!-- Button trigger modal -->
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       Launch demo modal
@@ -189,6 +306,8 @@
     <script type="text/javascript" src="http://www.scribd.com/javascripts/scribd_api.js" defer></script>
     <script type="text/javascript" src="asset/js/ziggurat.js"></script>
     <script type="text/javascript" src="asset/js/jquery.ba-hashchange.min.js"></script>
+    <script type="text/javascript" src="asset/js/globalSettings.js"></script>
+    <script type="text/javascript" src="asset/js/util.js"></script>
     <script type="text/javascript" src="asset/js/routeManager.js"></script>
     <script type="text/javascript" src="asset/js/viewModels.js"></script>
 </body>

@@ -9,6 +9,9 @@ var routeManager = Sammy(function() {
     });
 });
 
+routerManager.pushState(hash){
+    location.hash = hash;
+}
 $(document).on("ready",function(){
     routeManager.run();
 });
