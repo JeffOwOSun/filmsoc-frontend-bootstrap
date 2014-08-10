@@ -59,11 +59,23 @@ cr.define("cr.modal.disk",function(){
     var model = cr.model.Disk;
     
     var isHidden = ko.observable(true);
+    
+    //this one stores info of the film,
+    //each item is a label: content pair
     var itemArray = ko.observableArray();
+    
     var controlArray = ko.observableArray([
-        
+        {
+            label: "Reserve" ,
+            click: function() {
+                //todo
+            }
+        },
     ]);
     
+    function reserveClick(){
+        var r=new cr.APIRequest(model, "POST", "/" + model.data.id() +"/reservation/");
+    }
     
     function show(){
         isHidden(false);
@@ -76,8 +88,61 @@ cr.define("cr.modal.disk",function(){
     cr.routeManager.get(hashTag+'/:id/',function(){
         //todo: now loading
     
-        model.get(id,function(){
+        model.get(id, function(){
             //after loading success
+            itemArray.removeAll();
+            itemArray.push([
+                {
+                    name:"Director",
+                    content:model.data.director_en()+' / '+model.data.director_ch(),
+                },
+                {
+                    name:"Stars",
+                    content:model.data.actors().join(', '),
+                },
+                {
+                    name:"Category",
+                    content:model.data.category(),
+                },
+                {
+                    name:"Tags",
+                    content:model.data.tags().join(' '),
+                },
+                {
+                    name:"Length",
+                    content:model.data.length()+' min.',
+                },
+                {
+                    name:"IMDB Link",
+                    content:model.data.imdb_url(),
+                    href:"www.imdb.com/title/"+model.data.imdb_url(),
+                },
+                {
+                    name:"Call Number",
+                    content:model.data.disk_type()+model.data.id(),
+                },
+                {
+                    name:"Disk Type",
+                    content:(function(){
+                    switch model.data.disk_type()
+                        case 'A':
+                            return 'VCD';
+                            break;
+                        case 'B':
+                            return 'DVD';
+                            break;
+                    })(),
+                },
+                {
+                    name:"Borrowed",
+                    content:model.data.borrow_cnt()+' time(s)',
+                },
+                {
+                    name:"Disk State",
+                    content:model.data.avail_type(),
+                },
+            ]);
+            
             if(cr.modal.current != cr.modal[name]){
                 if(cr.modal.current){
                     cr.modal.current.hide();

@@ -184,7 +184,7 @@ cr.define('cr', function() {
         /**
          * edit a model information.
          * @param {id} id The id of model to edit
-         * @param {Object} data Data to put
+         * @param {Object} data Data to put, in plain object form. Should contain only the fields that need update.
          * @param {boolean} update If true, update the cache based on return value
          * @param {Function} callback Function to call after successful access
          */

@@ -49,6 +49,37 @@
     -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="asset/js/bootstrap.js"></script>
+    <script>
+        $(document).ready(function() {
+           $('#openBtn').click(function() {
+               $('#myModal').modal({
+                   show: true
+               })
+           });
+           $('.modal').on('hidden.bs.modal', function(event) {
+               $(this).removeClass('fv-modal-stack');
+               $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
+           });
+           $('.modal').on('shown.bs.modal', function(event) {
+               // keep track of the number of open modals
+               if (typeof($('body').data('fv_open_modals')) == 'undefined') {
+                   $('body').data('fv_open_modals', 0);
+               }
+
+               // if the z-index of this modal has been set, ignore.
+               if ($(this).hasClass('fv-modal-stack')) {
+                   return;
+               }
+               $(this).addClass('fv-modal-stack');
+               $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
+               $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
+               $('.modal-backdrop').not('.fv-modal-stack')
+                   .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
+               $('.modal-backdrop').not('fv-modal-stack')
+                   .addClass('fv-modal-stack');
+           });
+        });
+    </script>
     
     <!-- Knockout.js -->
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
@@ -131,117 +162,7 @@
     
     <div id="libaView" class="container-fluid" data-bind="css:{hide:isHidden}">
         <h1> DVD/VCD Library </h1>
-        <div class="row" data-bind="foreach: >
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="asset/meme/holder.png" alt="...">
-                    <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                    </div>
-                </div>
-            </div>
+        <div class="row" data-bind="foreach:" >
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
                     <img src="asset/meme/holder.png" alt="...">
@@ -281,7 +202,7 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div id="newsModal" data-bind="css:{hide:isHidden}" >
+                <div id="diskModal" data-bind="css:{hide:isHidden}" >
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" data-bind="text: title"></h4>
@@ -291,55 +212,24 @@
                             <div class="col-md-6">
                                 <img data-bind="attr:{src:cr.settings.upload_base+model.data.cover_url.url()}" class="img-responsive" alt="Responsive image"/>
                             </div>
-                            <div class="col-md-6">
-                                <div>
-                                    Director:
-                                    <span data-bind="text: model.data.director_en">
-                                    </span>
-                                    "&nbsp;/&nbsp;"
-                                    <span data-bind="text: model.data.director_cn">
-                                    </span>
-                                </div>
-                                <div>
-                                    Stars:
-                                    <span data-bind="text:model.data.">
-                                </div>
-                                <div>
-                                    Category:
-                                    <span data-bind="text:model.data.">
-                                </div>
-                                <div>
-                                    Tags:
-                                    <span data-bind="text:model.data.">
-                                </div>
-                                <div>
-                                    Length:
-                                    <span data-bind="text:model.data.">
-                                </div>
-                                <div>
-                                    IMDB Link:
-                                    <span data-bind="text:model.data.">
-                                </div>
+                            <div class="col-md-6" data-bind="foreach: itemArray">
+                                <div data-bind="text: name+': '+content, attr:{href: href ? href : ''}"></div>
                             </div>
+                        </div>
                         <div class="row">
+                            <div class="col-md-6" data-bind="text: model.data.desc_en()">
+                            </div>
+                            <div class="col-md-6" data-bind="text: model.data.desc_ch()">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!--todo: add a form for delivery options.
+                            -->
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-                <div id="diskModal" data-bind="css:{hide:isHidden}" >
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" data-bind="text: title"></h4>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary">Reserve </button>
                     </div>
                 </div>
             </div>
