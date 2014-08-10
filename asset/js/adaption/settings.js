@@ -5,6 +5,7 @@
 cr.define('cr.settings', function() {
   return {
     resource_base: 'http://ihome.ust.hk/~su_film/asset/',
+    upload_base: 'http://ihome.ust.hk/~su_film/asset/upload/',
     api_base: 'http://dml085.resnet.ust.hk:49000/film/api/',
     login_url: 'http://dml085.resnet.ust.hk:49000/film/member/login/',
     logout_url: 'http://dml085.resnet.ust.hk:49000/film/member/logout/',

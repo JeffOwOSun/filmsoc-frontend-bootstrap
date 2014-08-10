@@ -186,7 +186,7 @@ cr.define('cr.model', function() {
     User: User,
     Disk: Disk,
     RegularFilmShow: RegularFilmShow,
-    PreviewShowTicket: PreviewShowTicket,
+    FreeFilmTicket: PreviewShowTicket,
     DiskReview: DiskReview,
     News: News,
     Document: Document,

@@ -1,6 +1,6 @@
 /**
  * 
- * viewModels.js
+ * pageViewModels.js
  *
  */
 
@@ -27,7 +27,7 @@ function SiteSettingsViewModel(){
 }
 var siteSettingsViewModel = new SiteSettingsViewModel();
 
-cr.define("navBarViewModel",function()(){
+cr.define("cr.view.nav",function()(){
     //saving this CONTEXT into a variable, so that ENCAPSULATION will work for any callback defined here.
     var self=this;
     
@@ -78,7 +78,6 @@ cr.define("navBarViewModel",function()(){
         activateItem: activateItem,
     }
 }
-ko.applyBindings(cr.navBarViewModel, $('#navBar')[0]);
 
 //userPanelViewModel
 cr.define("userPanelViewModel",function(){
@@ -163,22 +162,12 @@ cr.define("userPanelViewModel",function(){
         initialize: initialize;
     }
 });
-ko.applyBindings(cr.userPanelViewModel, $("#userPanel")[0]);
-userPanelViewModel.initialize();
-
-//these will later be distributed into views
-/*
-navBarViewModel.addItem("Home","#!home");
-navBarViewModel.addItem("Free Film Tickets","#!ticket");
-navBarViewModel.addItem("Regular Film Show","#!show");
-navBarViewModel.addItem("Documents","#!document");
-navBarViewModel.addItem("Publications","#!publication");
-*/
 
 //ViewModel for home.
 cr.define('cr.view.home', function() {
     var name = 'news';
     var navBarTitle = 'Home';
+    var hashTag = '#!home';
     var isHidden = ko.observable(true);
     var itemArray = ko.observableArray();
     var controlArray = ko.observableArray([
@@ -198,13 +187,14 @@ cr.define('cr.view.home', function() {
     }
     
     
-    cr.routeManager.get('#!home',function(){
-        location.hash = '#!home/1/';
+    cr.routeManager.get(hashTag,function(){
+        location.hash = hashTag+'/1/';
     });
     
-    cr.routeManager.get('#!home/:page/',function(){
+    cr.routeManager.get(hashTag+'/:page/',function(){
         pager.loadPage(page,function(){
             //after loading success
+            cr.view.nav.activateItem(hashTag);
             if(cr.view.current != cr.view.home){
                 if(cr.view.current){
                     cr.view.current.hide();
@@ -215,15 +205,228 @@ cr.define('cr.view.home', function() {
         });
     });
     
+    cr.view.nav.addItem(navBarTitle, hashTag);
+    
     return {
         itemArray: itemArray,
+        isHidden:isHidden,
+        pager: pager,
+        show: show,
+        hide: hide,
     }
 });
-ko.applyBindings(cr.view.home, $("homeView")[0]);
 
 //ViewModel for DVD/VCD Library.
+cr.define("cr.view.liba",function(){
+    var name = 'news';
+    var navBarTitle = 'DVD/VCD Library';
+    var hashTag = '#!liba';
+    var isHidden = ko.observable(true);
+    var itemArray = ko.observableArray();
+    var controlArray = ko.observableArray([
+        
+    ]);
+    var pageNav = ko.observableArray();
+    
+    var pager = new cr.Pager(cr.model.Disk, '/?limit=12');
+    
+    function show(){
+        isHidden(false);
+    }
+    
+    function hide(){
+        isHidden(true);
+    }
+    
+    
+    cr.routeManager.get(hashTag,function(){
+        location.hash = hashTag+'/1/';
+    });
+    
+    cr.routeManager.get(hashTag+'/:page/',function(){
+        pager.loadPage(page,function(){
+            //after loading success
+            cr.view.nav.activateItem(hashTag);
+            if(cr.view.current != cr.view.liba){
+                if(cr.view.current){
+                    cr.view.current.hide();
+                }
+                cr.view.current = cr.view.liba;
+                cr.view.current.show();
+            }
+        });
+    });
+    
+    cr.view.nav.addItem(navBarTitle, hashTag);
+    
+    return {
+        itemArray: itemArray,
+        isHidden:isHidden,
+        pager: pager,
+        show: show,
+        hide: hide,
+    }
+});
 
+cr.define("cr.view.fft",function(){
+    var name = 'ticket'; 
+    var navBarTitle = 'Free Film Tickets';
+    var hashTag = '#!fft';
+    var isHidden = ko.observable(true);
+    var itemArray = ko.observableArray();
+    var controlArray = ko.observableArray([
+        
+    ]);
+    var pageNav = ko.observableArray();
+    
+    var pager = new cr.Pager(cr.model.FreeFilmTicket, '/?limit=10');
+    
+    function show(){
+        isHidden(false);
+    }
+    
+    function hide(){
+        isHidden(true);
+    }
+    
+    
+    cr.routeManager.get(hashTag,function(){
+        location.hash = hashTag+'/1/';
+    });
+    
+    cr.routeManager.get(hashTag+'/:page/',function(){
+        pager.loadPage(page,function(){
+            //after loading success
+            cr.view.nav.activateItem(hashTag);
+            if(cr.view.current != cr.view.fft){
+                if(cr.view.current){
+                    cr.view.current.hide();
+                }
+                cr.view.current = cr.view.fft;
+                cr.view.current.show();
+            }
+        });
+    });
+    
+    cr.view.nav.addItem(navBarTitle, hashTag);
+    
+    return {
+        itemArray: itemArray,
+        isHidden: isHidden,
+        pager: pager,
+        show: show,
+        hide: hide,
+    }
+});
 
+cr.define("cr.view.sponsors",function(){
+    var name = 'sponsors'; 
+    var navBarTitle = 'Free Film Tickets';
+    var hashTag = '#!sponsors';
+    var isHidden = ko.observable(true);
+    var itemArray = ko.observableArray();
+    var controlArray = ko.observableArray([
+        
+    ]);
+    var pageNav = ko.observableArray();
+    
+    var pager = new cr.Pager(cr.model.Sponsor, '/?limit=10');
+    
+    function show(){
+        isHidden(false);
+    }
+    
+    function hide(){
+        isHidden(true);
+    }
+    
+    
+    cr.routeManager.get(hashTag,function(){
+        location.hash = hashTag+'/1/';
+    });
+    
+    cr.routeManager.get(hashTag+'/:page/',function(){
+        pager.loadPage(page,function(){
+            //after loading success
+            cr.view.nav.activateItem(hashTag);
+            if(cr.view.current != cr.view.sponsors){
+                if(cr.view.current){
+                    cr.view.current.hide();
+                }
+                cr.view.current = cr.view.sponsors;
+                cr.view.current.show();
+            }
+        });
+    });
+    
+    cr.view.nav.addItem(navBarTitle, hashTag);
+    
+    return {
+        itemArray: itemArray,
+        isHidden:isHidden,
+        pager: pager,
+        show: show,
+        hide: hide,
+    }
+});
 
+cr.define("cr.view.aboutUs",function(){
+    var name = 'aboutUs'; 
+    var navBarTitle = 'About Us';
+    var hashTag = '#!aboutus';
+    var isHidden = ko.observable(true);
+    var itemArray = ko.observableArray();
+    var controlArray = ko.observableArray([
+        
+    ]);
+    var pageNav = ko.observableArray();
+    
+    var pager = new cr.Pager(cr.model.Exco, '/?limit=20');
+    
+    function show(){
+        isHidden(false);
+    }
+    
+    function hide(){
+        isHidden(true);
+    }
+    
+    
+    cr.routeManager.get(hashTag,function(){
+        location.hash = hashTag+'/1/';
+    });
+    
+    cr.routeManager.get(hashTag+'/:page/',function(){
+        pager.loadPage(page,function(){
+            //after loading success
+            cr.view.nav.activateItem(hashTag);
+            if(cr.view.current != cr.view.aboutUs){
+                if(cr.view.current){
+                    cr.view.current.hide();
+                }
+                cr.view.current = cr.view.aboutUs;
+                cr.view.current.show();
+            }
+        });
+    });
+    
+    cr.view.nav.addItem(navBarTitle, hashTag);
+    
+    return {
+        itemArray: itemArray,
+        isHidden:isHidden,
+        pager: pager,
+        show: show,
+        hide: hide,
+    }
+});
 
+ko.applyBindings(cr.navBarViewModel, $('#navBar')[0]);
+ko.applyBindings(cr.userPanelViewModel, $("#userPanel")[0]);
+userPanelViewModel.initialize();
+ko.applyBindings(cr.view.home, $("#homeView")[0]);
+ko.applyBindings(cr.view.liba, $("#libaView")[0]);
+ko.applyBindings(cr.view.fft, $("#fftView")[0]);
+ko.applyBindings(cr.view.sponsors, $("#sponsorsView")[0]);
+ko.applyBindings(cr.view.aboutUs, $("#aboutUsView")[0]);
 

@@ -48,7 +48,6 @@ cr.define('cr', function() {
    * Load a page.
    * @param {integer} pos The pageNumber.
    * @param {Function} callback The callback after loading.
-   * @private
    */
     function loadPage(pos, callback){
         var r=new APIRequest(this.model, 'GET', this.query+'&page='+pos);
@@ -67,8 +66,7 @@ cr.define('cr', function() {
             //first clean itemList
             itemList.removeAll();
             for (var i=0; i<obj.objects.length; i++) {
-                //update cache by the way :-)
-                this.model.update(obj.objects[i],1);
+                
                 this.itemList.push(this.model.filter(obj.objects[i]));
             }
             if (callback) {

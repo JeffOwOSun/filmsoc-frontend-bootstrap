@@ -14,8 +14,9 @@ cr.define('cr', function() {
         Object.defineProperty(this, 'name', {
             value: name,
         });
-        this._cache = {};
+        this.data = {};
         this.fields = [];
+        this.accessHistory = [];
     }
 
     /**
@@ -126,7 +127,8 @@ cr.define('cr', function() {
     BaseModel.prototype = {
         /**
          * SYS: filter using fields specified.
-         * data must be the object under "Objects" field of a normal retrieved data 
+         * data must be the object under "Objects" if the request was made using query other than id. 
+         * In this case, a meta object will be on the same level as object, which is what we don't want to carry in our observables.
          */
         filter: function(data){
             var result ={};
@@ -142,20 +144,15 @@ cr.define('cr', function() {
         /**
          * Update the data in the cache.
          * @param {Object} data The data to update
-         * @param {integer} level The dirty level to set
          */
-        update: function(data, level) {
-            if (!this._cache[data.id]) {
-                this._cache[data.id] = {
-                    data: {}
-                };
+        update: function(data) {
+            if (!this.data){
+                this.data = ko.mapping.fromJS(this.filter(data));
+                this.accessHistory.push = this.data.id();
+            } else {
+                ko.mapping.fromJS(this.filter(data),this.data);
+                this.accessHistory.push = this.data.id()
             }
-            for (var key in data) {
-                if (this.fields.indexOf(key) !== -1) {
-                    this._cache[data.id].data[key] = data[key];
-                }
-            }
-            this._cache[data.id].dirty = level;
         },
 
         /**
@@ -164,17 +161,17 @@ cr.define('cr', function() {
          * @param {Function} callback The callback to call after retrieve data.
          */
         get: function(id, callback) {
-            if (this._cache[id] && this._cache[id].dirty > 0) {
+            if (this.data && this.data.id()==id) {
                 if (callback) {
-                    callback(deepCopy(this._cache[id].data));
+                    callback(this.data));
                 }
             } else {
                 //retrieve it
-                var r = new APIRequest(this, 'GET', '/' + id + '/', this._cache[id]);
+                var r = new APIRequest(this, 'GET', '/' + id + '/', this.data);
                 r.onload = (function(e) {
-                    this.update(e.recObj, 1);
+                    this.update(e.recObj);
                     if (callback) {
-                        callback(deepCopy(this._cache[id].data));
+                        callback(deepCopy(this.data.data));
                     }
                 }).bind(this);
                 r.onerror = function(e) {
@@ -195,10 +192,10 @@ cr.define('cr', function() {
             var r = new APIRequest(this, 'PUT', '/' + id + '/');
             r.onload = (function(e) {
                 if (update) {
-                    this.update(e.recObj, 2);
+                    this.update(e.recObj);
                 }
                 if (callback) {
-                    callback(deepCopy(this._cache[id].data));
+                    callback(deepCopy(this.data.data));
                 }
             }).bind(this);
             r.onerror = function(e) {
@@ -215,9 +212,9 @@ cr.define('cr', function() {
         post: function(data, callback) {
             var r = new APIRequest(this, 'POST', '/');
             r.onload = (function(e) {
-                this.update(e.recObj, 2);
+                this.update(e.recObj);
                 if (callback) {
-                    callback(deepCopy(this._cache[e.recObj.id].data));
+                    callback(deepCopy(e.recObj));
                 }
             }).bind(this);
             r.onerror = function(e) {
@@ -234,8 +231,13 @@ cr.define('cr', function() {
         remove: function(id, callback) {
             var r = new APIRequest(this, 'DELETE', '/' + id + '/');
             r.onload = (function(e) {
-                if (this._cache[e.recObj.id]) {
-                    delete this._cache[e.recObj.id];
+                if (this.data.id()==e.recObj.id) {
+                    
+                    //remove from history all the ids that are equal to this.data.id;
+                   
+                    //load the newest one
+                    
+                    // but do i need to do that?
                 }
                 if (callback) {
                     callback(e.recObj);
@@ -246,60 +248,11 @@ cr.define('cr', function() {
             };
             r.send();
         },
-
-        /**
-         * Setup the basic behaviour of the model.
-         * @param {boolean} refresh If true, refresh dirty list every 6 minutes
-         */
-        setup: function(refresh) {
-            if (refresh) {
-                addDirty(this);
-            }
-        },
     }
 
-    /**
-     * Add a model to retrieve dirty info.
-     * @param {BaseModel} model The model to register
-     */
-    function addDirty(model) {
-        dirty_listening.push(model);
-    }
-
-    /**
-     * Init dirty utility.
-     */
-    function ModelInit() {
-        var delay = 6 * 60 * 1000;
-        var refresh_dirty = function() {
-            var r = new APIRequest({
-                name: 'dirty'
-            }, 'GET', '/', true);
-            r.onerror = function(e) {
-                if (e.recObj.errno !== 403) {
-                    setTimeout(refresh_dirty, delay);
-                }
-            };
-            r.onload = function(e) {
-                for (var i = 0; i < dirty_listening.length; i++) {
-                    var model = dirty_listening[i],
-                        list = e.recObj[model.name];
-                    for (var j = 0; list && j < list.length; j++) {
-                        model._cache[list[i]] && (model._cache[list[i]].dirty--);
-                    }
-                }
-                setTimeout(refresh_dirty, delay);
-            };
-            r.send();
-        };
-        setTimeout(refresh_dirty, delay);
-    }
-
+    
     return {
         BaseModel: BaseModel,
         APIRequest: APIRequest,
-        ModelInit: ModelInit,
     };
 });
-
-cr.ModelInit();
